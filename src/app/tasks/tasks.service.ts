@@ -8,8 +8,9 @@ export class TasksService {
 
   tasks = signal<Task[]>([]);
 
-  getTasks() {
-    return this.tasks.asReadonly();
+  getTasks(selectedFilter: string) {
+    let allTasks = this.tasks();
+    return allTasks.filter(task => selectedFilter === 'all' || task?.status === selectedFilter?.toUpperCase());
   }
 
   addTask(title: string, description: string) {

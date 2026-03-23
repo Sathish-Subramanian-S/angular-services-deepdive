@@ -16,9 +16,11 @@ export class TasksListComponent  {
   injectedTasksService = inject(TasksService);
 
   selectedFilter = signal<string>('all');
-  tasks  = this.injectedTasksService.getTasks();
 
+  tasks  = this.injectedTasksService.getTasks(this.selectedFilter());
+ 
   onChangeTasksFilter(filter: string) {
     this.selectedFilter.set(filter);
+    this.tasks = this.injectedTasksService.getTasks(this.selectedFilter());
   }
 }
